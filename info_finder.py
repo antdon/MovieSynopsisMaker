@@ -1,9 +1,12 @@
 from selenium import webdriver
+from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import time
 
 class InfoFind():
     def __init__(self, title: str) -> None:
-        self.driver = webdriver.Firefox()
+        self.options = webdriver.FirefoxOptions()
+        self.options.headless = True
+        self.driver = webdriver.Firefox(options=self.options)
         self.title = title
 
     def GetInfo(self) -> str:
@@ -17,6 +20,4 @@ class InfoFind():
         synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
         return synop.text
 
-poop = InfoFind("10 things I hate about you movie")
-poop.GetInfo()
 
