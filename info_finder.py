@@ -2,6 +2,7 @@ from selenium import webdriver
 from selenium.common.exceptions import *
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import time
+import pdb
 #TODO - try catch for neterror
 
 class InfoFind():
@@ -16,13 +17,14 @@ class InfoFind():
         self.driver.find_element_by_name('search').send_keys(self.title)
         self.driver.find_element_by_xpath('/html/body/div[3]/form/fieldset/button').click()
         try:
-            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
+            synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
         except NoSuchElementException:
-            self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
-            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
-        synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
+            try:
+                self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
+            except NoSuchElementException:
+                self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
+                self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
         return synop.text
 
-poop = InfoFind('spiderman far from home movie')
-poop.GetInfo()
-
+#poop = InfoFind("portrait of a lady on fire")
+#print(poop.GetInfo())
