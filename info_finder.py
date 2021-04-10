@@ -1,23 +1,28 @@
 from selenium import webdriver
+from selenium.common.exceptions import *
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import time
+#TODO - try catch for neterror
 
 class InfoFind():
     def __init__(self, title: str) -> None:
         self.options = webdriver.FirefoxOptions()
-        self.options.headless = True
+        self.options.headless = False
         self.driver = webdriver.Firefox(options=self.options)
         self.title = title
 
     def GetInfo(self) -> str:
         self.driver.get("https://www.wikipedia.org/")
-        search_bar = self.driver.find_element_by_name('search')
-        search_bar.send_keys(self.title)
-        search_but = self.driver.find_element_by_xpath('/html/body/div[3]/form/fieldset/button')
-        search_but.click()
-        result = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a')
-        result.click()
+        self.driver.find_element_by_name('search').send_keys(self.title)
+        self.driver.find_element_by_xpath('/html/body/div[3]/form/fieldset/button').click()
+        try:
+            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
+        except NoSuchElementException:
+            self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
+            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
         synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
         return synop.text
 
+poop = InfoFind('spiderman far from home movie')
+poop.GetInfo()
 
