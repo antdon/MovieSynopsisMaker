@@ -8,7 +8,7 @@ import pdb
 class InfoFind():
     def __init__(self, title: str) -> None:
         self.options = webdriver.FirefoxOptions()
-        self.options.headless = False
+        self.options.headless = True
         self.driver = webdriver.Firefox(options=self.options)
         self.title = title
 
@@ -22,7 +22,7 @@ class InfoFind():
             self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
             self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
         synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
+        if synop.text == '':
+            synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[4]')
         return synop.text
 
-#poop = InfoFind("portrait of a lady on fire")
-#print(poop.GetInfo())
