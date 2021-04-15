@@ -10,12 +10,13 @@ class SynopMaker:
         return info.GetInfo()
         
     def make_file(self):
-        return open("synopsis", "w", 1)
+        return open("synopsis", "w")
 
     def write_synop(self, movie_name):
         text = self.make_file()
         synopsis = self.get_synop(movie_name)
         text.write(synopsis)
+        text.close()
 
 
 #poop = SynopMaker()
