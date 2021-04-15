@@ -17,13 +17,11 @@ class InfoFind():
         self.driver.find_element_by_name('search').send_keys(self.title)
         self.driver.find_element_by_xpath('/html/body/div[3]/form/fieldset/button').click()
         try:
-            synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
+            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
         except NoSuchElementException:
-            try:
-                self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
-            except NoSuchElementException:
-                self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
-                self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
+            self.driver.find_element_by_xpath('//*[@id="mw-search-DYM-suggestion"]').click()
+            self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[4]/div[3]/ul/li[1]/div[1]/a').click()
+        synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[2]')
         return synop.text
 
 #poop = InfoFind("portrait of a lady on fire")
