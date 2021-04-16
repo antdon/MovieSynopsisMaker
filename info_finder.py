@@ -3,6 +3,7 @@ from selenium.common.exceptions import *
 from selenium.webdriver.firefox.options import Options as FirefoxOptions
 import time
 import pdb
+import sys
 #TODO - try catch for neterror
 
 class InfoFind():
@@ -31,6 +32,7 @@ class InfoFind():
             ind += 1
         if synop.text == '':
             synop = "could not find synopsis" 
+            print("could not find synopsis for " + self.title, file = sys.stderr) 
         if  isinstance(synop, str):
             return synop
         else:
