@@ -26,6 +26,9 @@ class InfoFind():
             synop = self.driver.find_element_by_xpath('/html/body/div[3]/div[3]/div[5]/div[1]/p[4]')
         if synop.text == '':
             synop = "could not find synopsis" 
-        return synop.text
+        if  isinstance(synop, str):
+            return synop
+        else:
+            return synop.text
 
 
